@@ -1,0 +1,53 @@
+<!-- templates/game.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancer une Partie - Jeu du Pendu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Titre principal -->
+    <h1>Bienvenue au Jeu du Pendu</h1>
+
+    <!-- Sous-titre -->
+    <h2>Remplissez le formulaire pour commencer la partie</h2>
+
+    <!-- Formulaire pour le pseudo et les choix -->
+    <form action="/start" method="POST">
+        <!-- Pseudo -->
+        <label for="pseudo">Entrez votre pseudo :</label>
+        <input type="text" id="pseudo" name="pseudo" placeholder="Votre pseudo" required>
+
+        <!-- Catégories de mots -->
+        <p>Choisissez la catégorie de mots :</p>
+        <div>
+            <input type="checkbox" id="verbes" name="categories" value="verbes">
+            <label for="verbes">Verbes</label>
+        </div>
+        <div>
+            <input type="checkbox" id="nomsPropres" name="categories" value="nomsPropres">
+            <label for="nomsPropres">Noms Propres</label>
+        </div>
+        <div>
+            <input type="checkbox" id="motsSimples" name="categories" value="motsSimples">
+            <label for="motsSimples">Mots Simples</label>
+        </div>
+
+        <!-- Choix du nombre de lettres à afficher -->
+        <label for="lettresAffichees">Nombre de lettres affichées au début :</label>
+        <select id="lettresAffichees" name="lettresAffichees" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        <!-- Bouton pour lancer la partie -->
+        <button type="submit" class="btn">Lancer la Partie</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+/* css/style.css */
+
+/* Corps de la page */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #282c34;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Titre et sous-titre */
+h1, h2 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/* Styles du bouton */
+a.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #61dafb; /* Bleu clair initial */
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animation d'ombre et de zoom au survol */
+a.btn:hover {
+    background-color: #21a1f1; /* Bleu plus foncé au survol */
+    box-shadow: 0 10px 20px rgba(33, 161, 241, 0.5); /* Ombre pour effet 3D */
+    transform: scale(1.1); /* Le bouton grandit légèrement */
+    cursor: pointer;
+}
+
+/* Effet animé de "vagues" quand on clique */
+a.btn:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+a.btn:active:before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease;
+}
+
+/* Ajouter une animation d'apparition en fondu et montée pour le bouton */
+a.btn {
+    animation: fadeInUp 1.5s ease-out;
+    animation-delay: 1s; /* Apparaît après le texte */
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px); /* Commence en bas */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Remonte à sa place normale */
+    }
+}
