@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Leaderboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Mot trouvé</th>
+                <th>Essais restants</th>
+                <th>Catégorie</th>
+                <th>Lettres affichées</th>
+                <th>Résultat</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboardTable">
+        </tbody>
+    </table>
+    <div class="actions">
+        <a href="index.html" class="btn">Retour au menu principal</a>
+    </div>
+
+    <script>
+        const leaderboard = JSON.parse(localStorage.getItem("leaderboard") || "[]");
+        const leaderboardTable = document.getElementById("leaderboardTable");
+        leaderboard.forEach(entry => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${entry.pseudo}</td>
+                <td>${entry.motATrouver}</td>
+                <td>${entry.essaisRestants}</td>
+                <td>${entry.category}</td>
+                <td>${entry.lettresAffichees}</td>
+                <td>${entry.status === "win" ? "Victoire" : "Défaite"}</td>
+            `;
+            leaderboardTable.appendChild(row);
+        });
+    </script>
+</body>
+</html>

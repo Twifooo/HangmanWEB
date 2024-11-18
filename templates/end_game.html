@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fin de la Partie</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Fin de la Partie</h1>
+    <div id="gameResult">
+        <p id="message"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Mot trouvé</th>
+                    <th>Essais restants</th>
+                    <th>Catégorie</th>
+                    <th>Lettres affichées</th>
+                    <th>Résultat</th>
+                </tr>
+            </thead>
+            <tbody id="currentGame">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="actions">
+        <a href="index.html" class="btn">Rejouer</a>
+        <a href="leaderboard.html" class="btn">Voir le leaderboard</a>
+    </div>
+
+    <script>
+        const pseudo = localStorage.getItem("pseudo");
+        const motATrouver = localStorage.getItem("mot");
+        const essaisRestants = localStorage.getItem("essaisRestants");
+        const category = localStorage.getItem("categories");
+        const lettresAffichees = localStorage.getItem("lettresAffichees");
+        const gameStatus = localStorage.getItem("gameStatus");
+
+        const leaderboard = JSON.parse(localStorage.getItem("leaderboard") || "[]");
+        const currentGame = {
+            pseudo,
+            motATrouver,
+            essaisRestants: parseInt(essaisRestants, 10),
+            category,
+            lettresAffichees: parseInt(lettresAffichees, 10),
+            status: gameStatus
+        };
+        leaderboard.push(currentGame);
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+        const currentGameTable = document.getElementById("currentGame");
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${currentGame.pseudo}</td>
+            <td>${currentGame.motATrouver}</td>
+            <td>${currentGame.essaisRestants}</td>
+            <td>${currentGame.category}</td>
+            <td>${currentGame.lettresAffichees}</td>
+            <td>${currentGame.status === "win" ? "Victoire" : "Défaite"}</td>
+        `;
+        currentGameTable.appendChild(row);
+
+        const message = document.getElementById("message");
+        message.innerText = currentGame.status === "win" 
+            ? `Bravo ${pseudo}, vous avez gagné !` 
+            : `Dommage ${pseudo}, vous avez perdu. Le mot était "${motATrouver}".`;
+    </script>
+</body>
+</html>

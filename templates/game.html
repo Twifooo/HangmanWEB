@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeu Hangman</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        let motATrouver = "";
+        let lettresDevinees = [];
+        let lettresUtilisees = [];
+        let essaisRestants = 6;
+        let erreurs = 0;
+        let lettresCorrectes = [];
+        let lettresAffichees = 0;
+
+        const mots = {
+            verbes: ["manger", "courir", "nager", "parler", "travailler"],
+            mots: ["ordinateur", "hangman", "javascript", "apple", "computer"],
+            noms: ["chat", "chien", "voiture", "maison", "boulangerie"]
+        };
+
+        // Démarrer une nouvelle partie
+        function startGame() {
+            const category = localStorage.getItem("categories");
+            const pseudo = localStorage.getItem("pseudo");
+
+            // Choisir un mot aléatoire de la catégorie choisie
+            const words = mots[category];
+            motATrouver = words[Math.floor(Math.random() * words.length)];
+            lettresDevinees = Array(motATrouver.length).fill("_");
+            lettresUtilisees = [];
+            erreurs = 0;
+            essaisRestants = 6;
+            lettresCorrectes = [];
+            lettresAffichees = localStorage.getItem("lettresAffichees");
+
+            // Afficher les lettres du mot à deviner en fonction du nombre de lettres à afficher
+            if (lettresAffichees > 0) {
+                let positions = [];
+                while (positions.length < lettresAffichees) {
+                    let pos = Math.floor(Math.random() * motATrouver.length);
+                    if (!positions.includes(pos)) {
+                        positions.push(pos);
+                    }
+                }
+                positions.forEach(pos => {
+                    lettresDevinees[pos] = motATrouver[pos];
+                });
+            }
+
+            // Sauvegarder les informations dans localStorage
+            localStorage.setItem("mot", motATrouver);
+            localStorage.setItem("lettresAffichees", lettresAffichees);
+
+            updateGameDisplay();
+            updateHangman();
+        }
+
+        // Fonction qui gère l'affichage du jeu
+        function updateGameDisplay() {
+            // Met à jour le mot deviné
+            document.getElementById("mot").innerText = lettresDevinees.join(" ");
+            // Met à jour les lettres utilisées
+            document.getElementById("lettresUtilisees").innerText = lettresUtilisees.join(", ");
+            // Affiche les cœurs pour les essais restants
+            document.getElementById("essaisRestants").innerHTML = getHearts(essaisRestants);
+        }
+
+        // Fonction pour obtenir les cœurs pour les essais restants
+        function getHearts(remaining) {
+            let hearts = '';
+            for (let i = 0; i < remaining; i++) {
+                hearts += '❤️ ';
+            }
+            return hearts.trim();
+        }
+
+        // Fonction pour gérer une nouvelle tentative
+        function makeGuess() {
+            const lettre = document.getElementById("lettre").value.toLowerCase();
+            const feedbackElement = document.getElementById("feedback");
+            if (lettre && !lettresUtilisees.includes(lettre) && lettre.length === 1) {
+                lettresUtilisees.push(lettre);
+                if (motATrouver.includes(lettre)) {
+                    // Mise à jour des lettres devinées
+                    for (let i = 0; i < motATrouver.length; i++) {
+                        if (motATrouver[i] === lettre) {
+                            lettresDevinees[i] = lettre;
+                        }
+                    }
+                    lettresCorrectes.push(lettre);
+                    feedbackElement.innerText = `Bien joué ! La lettre "${lettre}" est dans le mot.`;
+                    feedbackElement.style.color = "green";
+                } else {
+                    // Erreur, mise à jour des essais
+                    erreurs++;
+                    essaisRestants--;
+                    feedbackElement.innerText = `Dommage ! La lettre "${lettre}" n'est pas dans le mot.`;
+                    feedbackElement.style.color = "red";
+                }
+                updateGameDisplay();
+                updateHangman();
+                checkGameStatus();
+            } else if (lettresUtilisees.includes(lettre)) {
+                feedbackElement.innerText = `La lettre "${lettre}" a déjà été utilisée.`;
+                feedbackElement.style.color = "orange";
+            } else {
+                feedbackElement.innerText = "Veuillez entrer une lettre valide.";
+                feedbackElement.style.color = "black";
+            }
+            // Réinitialiser le champ de la lettre
+            document.getElementById("lettre").value = "";
+        }
+
+        // Fonction pour dessiner le hangman
+        function updateHangman() {
+            const hangmanCanvas = document.getElementById('hangmanCanvas');
+            const ctx = hangmanCanvas.getContext('2d');
+            ctx.clearRect(0, 0, hangmanCanvas.width, hangmanCanvas.height); // Effacer l'ancien dessin
+
+            // Définir les différentes étapes du dessin en fonction du nombre d'erreurs
+            switch (erreurs) {
+                case 1:
+                    ctx.beginPath();
+                    ctx.arc(30, 50, 20, 0, Math.PI * 2, true); // Tête
+                    ctx.stroke();
+                    break;
+                case 2:
+                    ctx.beginPath();
+                    ctx.moveTo(30, 70);
+                    ctx.lineTo(30, 120); // Corps
+                    ctx.stroke();
+                    break;
+                case 3:
+                    ctx.beginPath();
+                    ctx.moveTo(30, 80);
+                    ctx.lineTo(0, 90); // Bras gauche
+                    ctx.stroke();
+                    break;
+                case 4:
+                    ctx.beginPath();
+                    ctx.moveTo(30, 80);
+                    ctx.lineTo(60, 90); // Bras droit
+                    ctx.stroke();
+                    break;
+                case 5:
+                    ctx.beginPath();
+                    ctx.moveTo(30, 120);
+                    ctx.lineTo(0, 150); // Jambe gauche
+                    ctx.stroke();
+                    break;
+                case 6:
+                    ctx.beginPath();
+                    ctx.moveTo(30, 120);
+                    ctx.lineTo(60, 150); // Jambe droite
+                    ctx.stroke();
+                    break;
+            }
+        }
+
+        // Vérifier la fin du jeu (victoire ou défaite)
+        function checkGameStatus() {
+            if (lettresDevinees.join('') === motATrouver) {
+                // Gagné, rediriger vers la page de fin
+                localStorage.setItem('gameStatus', 'win');
+                localStorage.setItem('mot', motATrouver);
+                localStorage.setItem('essaisRestants', essaisRestants);
+                window.location.href = "end_game.html";
+            } else if (erreurs >= 6) {
+                // Perdu, rediriger vers la page de fin
+                localStorage.setItem('gameStatus', 'lose');
+                localStorage.setItem('mot', motATrouver);
+                localStorage.setItem('essaisRestants', essaisRestants);
+                window.location.href = "end_game.html";
+            }
+        }
+
+        // Démarrer le jeu lors du chargement de la page
+        window.onload = function() {
+            const pseudo = localStorage.getItem("pseudo");
+            const category = localStorage.getItem("categories");
+            const lettersDisplayed = localStorage.getItem("lettresAffichees");
+
+            document.getElementById("pseudoDisplay").innerText = pseudo || "Inconnu";
+            document.getElementById("categoryDisplay").innerText = category || "Inconnu";
+
+            startGame();
+        };
+    </script>
+</head>
+<body>
+    <h1>Jeu du Pendu</h1>
+    <div class="game-info">
+        <p>Pseudo: <span id="pseudoDisplay"></span></p>
+        <p>Catégorie: <span id="categoryDisplay"></span></p>
+        <p>Mot à deviner : <span id="mot"></span></p>
+        <p>Essais Restants: <span id="essaisRestants"></span></p>
+        <p>Lettres Utilisées: <span id="lettresUtilisees"></span></p>
+    </div>
+
+    <div class="hangman">
+        <canvas id="hangmanCanvas" width="100" height="200"></canvas>
+    </div>
+
+    <div class="guess">
+        <input type="text" id="lettre" maxlength="1" placeholder="Entrez une lettre" autofocus>
+        <button onclick="makeGuess()">Essayer</button>
+    </div>
+
+    <div class="feedback">
+        <p id="feedback"></p>
+    </div>
+
+    <div class="actions">
+        <a href="index.html" class="btn">Retourner au menu principal</a>
+    </div>
+</body>
+</html>

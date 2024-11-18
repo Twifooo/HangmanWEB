@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeu Hangman - Démarrer</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Jeu Hangman</h1>
+    <form id="gameForm">
+        <div class="form-group">
+            <label for="pseudo">Entrez votre pseudo :</label>
+            <input type="text" id="pseudo" placeholder="Votre pseudo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="categories">Choisissez une catégorie :</label>
+            <select id="categories" required>
+                <option value="mots">Mots communs</option>
+                <option value="nomP">Noms propres</option>
+                <option value="verbes">Verbes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="lettresAffichees">Lettres affichées (maximum 3) :</label>
+            <input type="number" id="lettresAffichees" value="0" min="0" max="3">
+        </div>
+
+        <button type="submit" class="btn4">Démarrer le jeu</button>
+    </form>
+
+    <script>
+        // Lorsque le formulaire est soumis
+        document.getElementById("gameForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const pseudo = document.getElementById("pseudo").value;
+            const category = document.getElementById("categories").value;
+            let lettresAffichees = parseInt(document.getElementById("lettresAffichees").value);
+
+            // Limiter les lettres affichées à 3 au maximum
+            if (lettresAffichees > 3) {
+                lettresAffichees = 3;
+            }
+
+            // Sauvegarder les informations dans localStorage
+            localStorage.setItem("pseudo", pseudo);
+            localStorage.setItem("categories", category);
+            localStorage.setItem("lettresAffichees", lettresAffichees);
+
+            // Rediriger vers le jeu
+            window.location.href = "game.html";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+/* Corps de la page */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background: url('https://i.pinimg.com/originals/aa/77/f8/aa77f875bd7a3947640860914d33cef8.gif') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+/* Titre et sous-titre */
+h1 {
+    font-size: 4em;
+    font-weight: 700;
+    color: #61dafb;
+    margin: 0;
+    animation: fadeInDown 1.5s ease-out;
+}
+
+h2 {
+    font-size: 1em;
+    font-weight: 200;
+    color: #ffffff;
+    margin: 0;
+    animation: fadeInDown 1.5s ease-out;
+}
+
+/* Styles du bouton */
+a.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+a.btn:hover {
+    background-color: #21a1f1;
+    box-shadow: 0 10px 20px rgba(33, 161, 241, 0.5);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+a.btn:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+a.btn:active:before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease;
+}
+
+a.btn {
+    animation: fadeInUp 1.5s ease-out;
+    animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1:hover {
+    color: #ffffff;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.strip {
+    width: 100%;
+    height: 20px;
+    background-color: #007BFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    margin: 20px 0;
+}
+
+/* Styles du bouton rouge */
+.btn3 {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn3:hover {
+    background-color: #ff1a1a;
+    box-shadow: 0 3px 6px rgba(255, 77, 77, 0.5);
+    transform: scale(1.05);
+}
+
+.btn3:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+.btn3:active:before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease;
+}
+
+/* Styles du bouton bleu */
+.btn4 {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn4:hover {
+    background-color: #0056b3;
+    box-shadow: 0 3px 6px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.btn4:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+.btn4:active:before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease;
+}
+
+/* Conteneur du jeu */
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.game-info {
+    background-color: #3c4043;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.game-play {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.game-info {
+    animation: slideIn 0.5s ease-out forwards, float 3s ease-in-out infinite;
+}
+
+/* Lettres utilisées */
+.used-letters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.used-letters .letter {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-align: center;
+    min-width: 40px;
+    font-size: 18px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
