@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman - Nouvelle partie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="strip"></div>
+    <div class="container">
+        <h1>Nouvelle partie</h1>
+        <form action="/game" method="post">
+            <input type="text" name="pseudo" required placeholder="Votre pseudo">
+            <select name="difficulty" required>
+                <option value="easy">Facile</option>
+                <option value="medium">Moyen</option>
+                <option value="hard">Difficile</option>
+            </select>
+            <input type="number" name="revealedLetters" required placeholder="Nombre de lettres révélées" min="0" max="5">
+            <input type="number" name="lives" required placeholder="Nombre de vies" min="1" value="6">
+            <button type="submit" class="btn">Commencer</button>
+        </form>
+    </div>
+</body>
+</html>

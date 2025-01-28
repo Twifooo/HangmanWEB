@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman - Classement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="strip"></div>
+    <div class="container">
+        <h1>Classement</h1>
+        <div class="game-container">
+            <div class="game-info">
+                <table>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Pseudo</th>
+                        <th>Score</th>
+                    </tr>
+                    {{range $index, $entry := .}}
+                    <tr>
+                        <td>{{add $index 1}}</td>
+                        <td>{{$entry.Pseudo}}</td>
+                        <td>{{$entry.Score}}</td>
+                    </tr>
+                    {{end}}
+                </table>
+            </div>
+        </div>
+        <a href="/" class="btn3">Retour à l'accueil</a>
+    </div>
+</body>
+</html>

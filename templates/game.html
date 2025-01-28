@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman - Jeu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="strip"></div>
+    <div class="container">
+        <h1>Hangman</h1>
+        
+        {{if .Game}}
+            <div class="game-container">
+                <div class="game-info">
+                    <p>Mot à deviner : {{.Game.DisplayWord}}</p>
+                    <p>Vies restantes : {{.Game.Lives}}</p>
+                </div>
+                
+                <div class="used-letters">
+                    <p>Lettres utilisées :</p>
+                    <div>
+                        {{range $letter := .Game.GuessedLettersString}}
+                            <span class="letter">{{$letter}}</span>
+                        {{end}}
+                    </div>
+                </div>
+                
+                {{if .Message}}
+                    <p class="message">{{.Message}}</p>
+                {{end}}
+                
+                <div class="game-play">
+                    <form action="/play" method="post">
+                        <input type="text" name="guess" maxlength="20" required placeholder="Entrez une lettre ou le mot">
+                        <div class="btn-group">
+                            <button type="submit" class="btn4">Deviner</button>
+                            <button type="submit" name="action" value="quit" class="btn3">Quitter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {{else}}
+            <div class="game-over">
+                <h2>{{.Message}}</h2>
+                <div class="btn-group">
+                    <a href="/game" class="btn">Nouvelle partie</a>
+                    <a href="/" class="btn3">Retour à l'accueil</a>
+                </div>
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    background: url('https://i.pinimg.com/originals/aa/77/f8/aa77f875bd7a3947640860914d33cef8.gif') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+h1 {
+    font-size: 4em;
+    font-weight: 700;
+    color: #61dafb;
+    margin: 0;
+    animation: fadeInDown 1.5s ease-out;
+}
+
+h2 {
+    font-size: 1em;
+    font-weight: 200;
+    color: #ffffff;
+    margin: 0;
+    animation: fadeInDown 1.5s ease-out;
+}
+
+a.btn, .btn4 {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+a.btn:hover, .btn4:hover {
+    background-color: #21a1f1;
+    box-shadow: 0 10px 20px rgba(33, 161, 241, 0.5);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+a.btn:before, .btn4:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+a.btn:active:before, .btn4:active:before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease;
+}
+
+a.btn, .btn4 {
+    animation: fadeInUp 1.5s ease-out;
+    animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1:hover {
+    color: #ffffff;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.strip {
+    width: 100%;
+    height: 20px;
+    background-color: #007BFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    margin: 20px 0;
+    position: relative;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.btn3 {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn3:hover {
+    background-color: #ff1a1a;
+    box-shadow: 0 3px 6px rgba(255, 77, 77, 0.5);
+    transform: scale(1.05);
+}
+
+.btn3:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+.btn3:active:before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease;
+}
+
+input[name="guess"] {
+    position: relative;
+    z-index: 10;
+    font-size: 20px;
+    padding: 10px;
+    border: 2px solid white;
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    margin-right: 10px;
+    width: 250px;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    position: relative;
+    z-index: 10;
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #61dafb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #21a1f1;
+}
+
+.game-play form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-info {
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.used-letters {
+    margin-top: 20px;
+}
+
+.letter {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: rgba(255,255,255,0.2);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
