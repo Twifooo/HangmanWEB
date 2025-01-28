@@ -1,0 +1,3 @@
+[submodule "HangmanWEB"]
+	path = HangmanWEB
+	url = https://github.com/Twifooo/HangmanWeb
